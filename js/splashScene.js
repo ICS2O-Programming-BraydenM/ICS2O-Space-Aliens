@@ -11,12 +11,12 @@
  */
 class SplashScene extends Phaser.Scene {
   /**
-   * This method is the constuctor.
+   * This method is the constructor.
    */
   constructor () {
     super({ key: 'splashScene' })
-
-    this.splashSceneImage = null
+    // adding a background image to the splashcene, immaculata crest
+    this.splashSceneBackgroundImage = null
   }
 
   /**
@@ -44,13 +44,13 @@ class SplashScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    this.splashSceneImage = this.add.sprite(0, 0, 'splashSceneBackground')
-    this.splashSceneImage.x = 1920 / 2 
-    this.splashSceneImage.y = 1080 / 2
+    this.splashSceneBackgroundImage = this.add.sprite(0, 0, 'splashSceneBackground')
+    this.splashSceneBackgroundImage.x = 1920 / 2 
+    this.splashSceneBackgroundImage.y = 1080 / 2
   }
 
   /**
-   * Should be overidden by your own Scenes.
+   * Should be overridden by your own Scenes.
    * This method is called once per game step while the scene is running.
    * @param {number} time - The current time.
    * @param {number} delta - The delta time in ms since the last frame.

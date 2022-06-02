@@ -4,23 +4,17 @@
 //
 // Created by: Brayden MacMillan
 // Created on: May 2022
-// This is the Title Scene 
+// This is the Menu Scene 
 
 /**
- * This class is the Title Scene.
+ * This class is the Menu Scene.
  */
-class TitleScene extends Phaser.Scene {
+class MenuScene extends Phaser.Scene {
   /**
-   * This method is the constructor.
+   * This method is the constuctor.
    */
   constructor () {
-    super({ key: 'titleScene' })
-    // adding a background image to my title scene, a starry night
-    this.titleSceneBackgroundImage = null
-    // adding text to this title scene
-    this.titleSceneText = null
-    // adding style to the text
-    this.titleSceneTextStyle = { font: '200px Times', fill: '#fde4b9', align: 'center' }
+    super({ key: 'menuScene' })
   }
 
   /**
@@ -38,8 +32,8 @@ class TitleScene extends Phaser.Scene {
    * Use it to load assets.
    */
   preload () {
-    console.log('Title Scene')
-    this.load.image('titleSceneBackground', '../images/stars.jpg')
+    console.log('Menu Scene')
+    this.load.image('titleSceneImage', '../images/stars.jpg')
   }
 
   /**
@@ -48,15 +42,13 @@ class TitleScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    this.titleSceneBackgroundImage = this.add.sprite(0, 0, 'titleSceneBackground')
-    this.titleSceneBackgroundImage.x = 1920 / 2 
-    this.titleSceneBackgroundImage.y = 1080 / 2
-
-    this.titleSceneText = this.add.text(1920 / 2, (1080 / 2) + 350, 'Falling STARS', this.titleSceneTextStyle).setOrigin(0.5)
+    this.titleSceneBackground = this.add.sprite(0, 0, 'titleSceneImage')
+    this.titleSceneBackground.x = 1920 / 2 
+    this.titleSceneBackground.y = 1080 / 2
   }
 
   /**
-   * Should be overridden by your own Scenes.
+   * Should be overidden by your own Scenes.
    * This method is called once per game step while the scene is running.
    * @param {number} time - The current time.
    * @param {number} delta - The delta time in ms since the last frame.
@@ -66,4 +58,4 @@ class TitleScene extends Phaser.Scene {
   }
 }
 
-export default TitleScene
+export default MenuScene
