@@ -15,7 +15,7 @@ class TitleScene extends Phaser.Scene {
    */
   constructor () {
     super({ key: 'titleScene' })
-    // adding a background image to my title scene, a starry night
+    // adding a variable that can hold a background image to my title scene, a starry night
     this.titleSceneBackgroundImage = null
     // adding text to this title scene
     this.titleSceneText = null
@@ -39,6 +39,7 @@ class TitleScene extends Phaser.Scene {
    */
   preload () {
     console.log('Title Scene')
+    // loading image so we can have a background image for my title scene
     this.load.image('titleSceneBackground', '../images/stars.jpg')
   }
 
@@ -48,10 +49,11 @@ class TitleScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
+    // create that background image for menu scene that was preloaded
     this.titleSceneBackgroundImage = this.add.sprite(0, 0, 'titleSceneBackground')
     this.titleSceneBackgroundImage.x = 1920 / 2 
     this.titleSceneBackgroundImage.y = 1080 / 2
-
+    // adding text to title scene 
     this.titleSceneText = this.add.text(1920 / 2, (1080 / 2) + 350, 'Falling STARS', this.titleSceneTextStyle).setOrigin(0.5)
   }
 
@@ -62,7 +64,10 @@ class TitleScene extends Phaser.Scene {
    * @param {number} delta - The delta time in ms since the last frame.
    */
   update (time, delta) {
-    // pass
+    // switch to menu scene after title scene is displayed for 6 seconds
+    if (time > 6000) {
+      this.scene.switch('menuScene')
+    }
   }
 }
 

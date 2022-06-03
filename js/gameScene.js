@@ -4,19 +4,17 @@
 //
 // Created by: Brayden MacMillan
 // Created on: May 2022
-// This is the Splash Scene 
+// This is the Game Scene 
 
 /**
- * This class is the Splash Scene.
+ * This class is the Game Scene.
  */
-class SplashScene extends Phaser.Scene {
+class GameScene extends Phaser.Scene {
   /**
-   * This method is the constructor.
+   * This method is the constuctor.
    */
   constructor () {
-    super({ key: 'splashScene' })
-    // creating a variable that can hold the background image for splash scene
-    this.splashSceneBackgroundImage = null
+    super({ key: 'gameScene' })
   }
 
   /**
@@ -34,9 +32,7 @@ class SplashScene extends Phaser.Scene {
    * Use it to load assets.
    */
   preload () {
-    console.log('Splash Scene')
-    // loading image so we can have a background image for my splash scene
-    this.load.image('splashSceneBackground', '../images/immaculata.jpeg')
+    console.log('Game Scene')
   }
 
   /**
@@ -45,25 +41,17 @@ class SplashScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    // create that background image for splash scene that was preloaded
-    this.splashSceneBackgroundImage = this.add.sprite(0, 0, 'splashSceneBackground')
-    this.splashSceneBackgroundImage.x = 1920 / 2 
-    this.splashSceneBackgroundImage.y = 1080 / 2
   }
 
   /**
-   * Should be overridden by your own Scenes.
+   * Should be overidden by your own Scenes.
    * This method is called once per game step while the scene is running.
    * @param {number} time - The current time.
    * @param {number} delta - The delta time in ms since the last frame.
    */
   update (time, delta) {
-    // switch to title scene after the splash scene is displayed for 3 seconds
-    if (time > 3000) {
-      this.scene.switch('titleScene')
-    }
+    // pass
   }
 }
 
-export default SplashScene
-
+export default GameScene

@@ -15,6 +15,10 @@ class MenuScene extends Phaser.Scene {
    */
   constructor () {
     super({ key: 'menuScene' })
+    // creating a variable that can hold the background image for menu scene
+    this.menuSceneBackgroundImage = null
+    // creating a variable so that users can click a button from menu scene to open game scene
+    this.startButton = null
   }
 
   /**
@@ -33,7 +37,10 @@ class MenuScene extends Phaser.Scene {
    */
   preload () {
     console.log('Menu Scene')
-    this.load.image('titleSceneImage', '../images/stars.jpg')
+    // loading image so we can have a background image for my menu scene
+    this.load.image('menuSceneBackground', '../images/galaxy.jpg')
+    // loading image so we can have a button to take us to game scene 
+    this.load.image('startButton', '../images/button.png')
   }
 
   /**
@@ -42,9 +49,17 @@ class MenuScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
-    this.titleSceneBackground = this.add.sprite(0, 0, 'titleSceneImage')
-    this.titleSceneBackground.x = 1920 / 2 
-    this.titleSceneBackground.y = 1080 / 2
+    // create that background image for menu scene that was preloaded
+    this.menuSceneBackgroundImage = this.add.sprite(0, 0, 'menuSceneBackground')
+    this.menuSceneBackgroundImage.x = 1920 / 2
+    this.menuSceneBackgroundImage.y = 1080 / 2
+
+    // creating a button that will be on our menu scene image 
+    this.startButton = this.add.sprite(1920 / 2, (1080 / 2) + 100, 'startButton')
+    // making the button interactive so that when we click on it we get transported to game scene
+    this.startButton.setInteractive({ useHandCursor: true })
+    // when the person clicks on image, make a button
+    this.startButton.on('pointerdown', () => this.clickButton())
   }
 
   /**
@@ -55,6 +70,11 @@ class MenuScene extends Phaser.Scene {
    */
   update (time, delta) {
     // pass
+  }
+
+  // function for the button to work
+  clickButton () {
+    this.scene.start('gameScene')
   }
 }
 
