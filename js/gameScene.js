@@ -15,6 +15,10 @@ class GameScene extends Phaser.Scene {
    */
   constructor () {
     super({ key: 'gameScene' })
+    // create a variable to hold the background of our game scene 
+    this.background = null
+    // create a variable that represents our sprite 
+    this.deer = null
   }
 
   /**
@@ -33,6 +37,10 @@ class GameScene extends Phaser.Scene {
    */
   preload () {
     console.log('Game Scene')
+    // loading image so we can have a background image for my game scene
+    this.load.image('starBackground', '../images/gamestar.jpg')
+    // loading image so we can have an image for my sprite
+    this.load.image('deer', '../images/deer.png')
   }
 
   /**
@@ -41,6 +49,11 @@ class GameScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   create (data) {
+    // create that background image for game scene that was preloaded
+    this.background = this.add.image(0, 0, 'starBackground').setScale(1.0)
+    this.background.setOrigin(0, 0)
+    // using physics to move sprite around the screen
+    this.deer = this.physics.add.sprite(1920 / 2, 1080 - 100, 'deer').setScale(0.5)
   }
 
   /**
