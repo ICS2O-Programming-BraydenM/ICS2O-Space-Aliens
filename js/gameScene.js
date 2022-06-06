@@ -63,7 +63,24 @@ class GameScene extends Phaser.Scene {
    * @param {number} delta - The delta time in ms since the last frame.
    */
   update (time, delta) {
-    // pass
+    // called 60 times a second, hopefully!
+    // create variables that allow us to move sprite left and right
+    const keyLeftObj = this.input.keyboard.addKey('LEFT')
+    const keyRightObj = this.input.keyboard.addKey('RIGHT')
+
+    if (keyLeftObj.isDown === true) {
+      this.deer.x -= 10
+      if (this.deer.x < 0) {
+        this.deer.x = 1920
+      }
+    }
+
+    if (keyRightObj.isDown === true) {
+      this.deer.x += 10
+      if (this.deer.x > 1920) {
+        this.deer.x = 0
+      }
+    }
   }
 }
 
