@@ -11,7 +11,7 @@
  */
 class GameScene extends Phaser.Scene {
   /**
-   * This method is the constuctor.
+   * This method is the constructor.
    */
   constructor () {
     super({ key: 'gameScene' })
@@ -64,7 +64,7 @@ class GameScene extends Phaser.Scene {
   }
 
   /**
-   * Should be overidden by your own Scenes.
+   * Should be overridden by your own Scenes.
    * This method is called once per game step while the scene is running.
    * @param {number} time - The current time.
    * @param {number} delta - The delta time in ms since the last frame.
@@ -76,26 +76,27 @@ class GameScene extends Phaser.Scene {
     const keyRightObj = this.input.keyboard.addKey('RIGHT')
     // create a variable that shoots a meteor when we hot the space bar
     const keySpaceObj = this.input.keyboard.addKey('SPACE')
-
+    
+    // if left arrow key is pressed, move sprite 10 pixels to the left
     if (keyLeftObj.isDown === true) {
       this.deer.x -= 10
       if (this.deer.x < 0) {
         this.deer.x = 1920
       }
     }
-
+    // if right arrow key is pressed, move sprite 10 pixels to the right
     if (keyRightObj.isDown === true) {
       this.deer.x += 10
       if (this.deer.x > 1920) {
         this.deer.x = 0
       }
     }
-
+    // if spacebar is pressed, drop a meteor onto the game scene
     if (keySpaceObj.isDown === true) {
       if (this.fireMeteor === false) {
         // fire meteor
         this.fireMeteor = true
-        // variabe that will shoot a new meteor every time space bar is clicked
+        // variable that will shoot a new meteor every time space bar is clicked
         const aNewMeteor = this.physics.add.sprite(this.deer.x, this.deer.y, 'meteor')
         this.meteorGroup.add(aNewMeteor)
       }

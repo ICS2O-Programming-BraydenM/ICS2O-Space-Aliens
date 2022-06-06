@@ -11,7 +11,7 @@
  */
 class MenuScene extends Phaser.Scene {
   /**
-   * This method is the constuctor.
+   * This method is the constructor.
    */
   constructor () {
     super({ key: 'menuScene' })
@@ -63,7 +63,7 @@ class MenuScene extends Phaser.Scene {
   }
 
   /**
-   * Should be overidden by your own Scenes.
+   * Should be overridden by your own Scenes.
    * This method is called once per game step while the scene is running.
    * @param {number} time - The current time.
    * @param {number} delta - The delta time in ms since the last frame.

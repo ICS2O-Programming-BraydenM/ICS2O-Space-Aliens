@@ -58,7 +58,7 @@ class SplashScene extends Phaser.Scene {
    * @param {number} delta - The delta time in ms since the last frame.
    */
   update (time, delta) {
-    // switch to title scene after the splash scene is displayed for 3 seconds
+    // switch to title scene after the splash scene is displayed for 4 seconds
     if (time > 4000) {
       this.scene.switch('titleScene')
     }
