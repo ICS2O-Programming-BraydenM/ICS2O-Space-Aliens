@@ -19,6 +19,8 @@ class GameScene extends Phaser.Scene {
     this.background = null
     // create a variable that represents our sprite 
     this.deer = null
+    // create a variable that shoots meteorites
+    this.fireMeteor = false
   }
 
   /**
@@ -41,6 +43,8 @@ class GameScene extends Phaser.Scene {
     this.load.image('starBackground', '../images/gamestar.jpg')
     // loading image so we can have an image for my sprite
     this.load.image('deer', '../images/deer.png')
+    // loading image so we can have meteors attacking sprite
+    this.load.image('meteor', '../images/meteor.png')
   }
 
   /**
@@ -54,6 +58,9 @@ class GameScene extends Phaser.Scene {
     this.background.setOrigin(0, 0)
     // using physics to move sprite around the screen
     this.deer = this.physics.add.sprite(1920 / 2, 1080 - 100, 'deer').setScale(0.5)
+
+    // create a group for the meteors
+    this.meteorGroup = this.physics.add.group()
   }
 
   /**
@@ -67,6 +74,8 @@ class GameScene extends Phaser.Scene {
     // create variables that allow us to move sprite left and right
     const keyLeftObj = this.input.keyboard.addKey('LEFT')
     const keyRightObj = this.input.keyboard.addKey('RIGHT')
+    // create a variable that shoots a meteor when we hot the space bar
+    const keySpaceObj = this.input.keyboard.addKey('SPACE')
 
     if (keyLeftObj.isDown === true) {
       this.deer.x -= 10
@@ -80,6 +89,20 @@ class GameScene extends Phaser.Scene {
       if (this.deer.x > 1920) {
         this.deer.x = 0
       }
+    }
+
+    if (keySpaceObj.isDown === true) {
+      if (this.fireMeteor === false) {
+        // fire meteor
+        this.fireMeteor = true
+        // variabe that will shoot a new meteor every time space bar is clicked
+        const aNewMeteor = this.physics.add.sprite(this.deer.x, this.deer.y, 'meteor')
+        this.meteorGroup.add(aNewMeteor)
+      }
+    }
+
+    if (keySpaceObj.isUp === true) {
+      this.fireMeteor = false
     }
   }
 }
