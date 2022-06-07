@@ -10,6 +10,18 @@
  * This class is the Game Scene.
  */
 class GameScene extends Phaser.Scene {
+  // create a meteor enemy
+  createMeteor () {
+    // create a variable that references our aliens location
+    const meteorXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920
+    let meteorXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50
+    meteorXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add a minus sign in 50% of cases
+  }
+
+
+
+
+  
   /**
    * This method is the constructor.
    */
@@ -44,7 +56,9 @@ class GameScene extends Phaser.Scene {
     // loading image so we can have an image for my sprite
     this.load.image('deer', '../images/deer.png')
     // loading image so we can have falling stars protecting the sprite, attacking our enemy
-    this.load.image('meteor', '../images/fallingstar.png')
+    this.load.image('fallingstar', '../images/fallingstar.png')
+    // loading image so we have an ememy, the meteors, which will be attacking the sprite
+    this.load.image('meteor', '../images/meteor.png')
 
     // adding sound files for game for our falling star
     this.load.audio('crash', '../sounds/fallingstar.wav')
@@ -62,8 +76,13 @@ class GameScene extends Phaser.Scene {
     // using physics to move sprite around the screen
     this.deer = this.physics.add.sprite(1920 / 2, 1080 - 100, 'deer').setScale(0.5)
 
-    // create a group for the meteors
+    // create a group for the falling stars
     this.fallingStarGroup = this.physics.add.group()
+
+    // create a group for the meteors
+    this.meteorGroup = this.add.group()
+    // create a function for meteors
+    this.createMeteor()
   }
 
   /**
@@ -100,8 +119,8 @@ class GameScene extends Phaser.Scene {
         // fire falling star
         this.fireFallingStar = true
         // variable that will shoot a falling star every time spacebar is clicked
-        const aNewMeteor = this.physics.add.sprite(this.deer.x, this.deer.y, 'meteor')
-        this.fallingStarGroup.add(aNewMeteor)
+        const aNewFallingStar = this.physics.add.sprite(this.deer.x, this.deer.y, 'fallingstar')
+        this.fallingStarGroup.add(aNewFallingStar)
         // add a falling star crash sound to gamescene
         this.sound.play('crash')
       }
