@@ -12,16 +12,18 @@
 class GameScene extends Phaser.Scene {
   // create a meteor enemy
   createMeteor () {
-    // create a variable that references our aliens location
+    // create a variable that generates a random number/area for our enemy to come from
     const meteorXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920
     let meteorXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50
     meteorXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add a minus sign in 50% of cases
+    const aMeteor = this.physics.add.sprite(meteorXLocation, -100, 'meteor')
+    // bring enemy downwards
+    aMeteor.body.velocity.y = 200
+    // allow enemy to move in different directions
+    aMeteor.body.velocity.x = meteorXVelocity
+    this.meteorGroup.add(aMeteor)
   }
 
-
-
-
-  
   /**
    * This method is the constructor.
    */
