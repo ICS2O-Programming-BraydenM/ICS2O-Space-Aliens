@@ -11,17 +11,19 @@
  */
 class GameScene extends Phaser.Scene {
   // create a meteor enemy
-  createMeteor () {
+  createMeteor() {
     // create a variable that generates a random number/area for our enemy to come from
     const meteorXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920
     let meteorXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50
     meteorXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add a minus sign in 50% of cases
-    const aMeteor = this.physics.add.sprite(meteorXLocation, -100, 'meteor')
+    const aMeteor = this.physics.add.sprite(meteorXLocation, -100, 'meteor').setScale(0.5)
     // bring enemy downwards
     aMeteor.body.velocity.y = 200
     // allow enemy to move in different directions
     aMeteor.body.velocity.x = meteorXVelocity
     this.meteorGroup.add(aMeteor)
+    // add sound to meteor
+    this.sound.play('bam')
   }
 
   /**
@@ -64,6 +66,8 @@ class GameScene extends Phaser.Scene {
 
     // adding sound files for game for our falling star
     this.load.audio('crash', '../sounds/fallingstar.wav')
+    // adding sound files for game for our meteors (enemy)
+    this.load.audio('bam', '../sounds/meteor.wav')
   }
 
   /**
@@ -85,6 +89,15 @@ class GameScene extends Phaser.Scene {
     this.meteorGroup = this.add.group()
     // create a function for meteors
     this.createMeteor()
+
+    // collisions between meteors and falling stars
+    this.physics.add.collider(this.fallingStarGroup, this.meteorGroup, function (fallingStarCollide, meteorCollide) {
+      meteorCollide.destroy()
+      fallingStarCollide.destroy()
+      this.sound.play('bam')
+      this.createMeteor()
+      this.createMeteor()
+    }.bind(this))
   }
 
   /**
