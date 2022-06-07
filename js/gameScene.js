@@ -19,8 +19,8 @@ class GameScene extends Phaser.Scene {
     this.background = null
     // create a variable that represents our sprite 
     this.deer = null
-    // create a variable that shoots meteorites
-    this.fireMeteor = false
+    // create a variable that shoots falling stars to protect sprite from enemy
+    this.fireFallingStar = false
   }
 
   /**
@@ -43,11 +43,11 @@ class GameScene extends Phaser.Scene {
     this.load.image('starBackground', '../images/gamestar.jpg')
     // loading image so we can have an image for my sprite
     this.load.image('deer', '../images/deer.png')
-    // loading image so we can have meteors attacking sprite
-    this.load.image('meteor', '../images/meteor.png')
+    // loading image so we can have falling stars protecting the sprite, attacking our enemy
+    this.load.image('meteor', '../images/fallingstar.png')
 
-    // adding sound files for game 
-    this.load.audio('crash', '../sounds/meteor.wav')
+    // adding sound files for game for our falling star
+    this.load.audio('crash', '../sounds/fallingstar.wav')
   }
 
   /**
@@ -63,7 +63,7 @@ class GameScene extends Phaser.Scene {
     this.deer = this.physics.add.sprite(1920 / 2, 1080 - 100, 'deer').setScale(0.5)
 
     // create a group for the meteors
-    this.meteorGroup = this.physics.add.group()
+    this.fallingStarGroup = this.physics.add.group()
   }
 
   /**
@@ -96,23 +96,23 @@ class GameScene extends Phaser.Scene {
     }
     // if spacebar is pressed, drop a meteor onto the game scene
     if (keySpaceObj.isDown === true) {
-      if (this.fireMeteor === false) {
-        // fire meteor
-        this.fireMeteor = true
-        // variable that will shoot a new meteor every time space bar is clicked
+      if (this.fireFallingStar === false) {
+        // fire falling star
+        this.fireFallingStar = true
+        // variable that will shoot a falling star every time spacebar is clicked
         const aNewMeteor = this.physics.add.sprite(this.deer.x, this.deer.y, 'meteor')
-        this.meteorGroup.add(aNewMeteor)
-        // add a meteor crash sound to gamescene
+        this.fallingStarGroup.add(aNewMeteor)
+        // add a falling star crash sound to gamescene
         this.sound.play('crash')
       }
     }
 
     if (keySpaceObj.isUp === true) {
-      this.fireMeteor = false
+      this.fireFallingStar = false
     }
 
     // move meteors up the screen
-    this.meteorGroup.children.each(function (item) {
+    this.fallingStarGroup.children.each(function (item) {
       item.y = item.y -15
       if (item.y < 0) {
         item.destroy()
