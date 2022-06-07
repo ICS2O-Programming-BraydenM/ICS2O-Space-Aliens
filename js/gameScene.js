@@ -45,6 +45,9 @@ class GameScene extends Phaser.Scene {
     this.load.image('deer', '../images/deer.png')
     // loading image so we can have meteors attacking sprite
     this.load.image('meteor', '../images/meteor.png')
+
+    // adding sound files for game 
+    this.load.audio('crash', '../sounds/meteor.wav')
   }
 
   /**
@@ -99,12 +102,22 @@ class GameScene extends Phaser.Scene {
         // variable that will shoot a new meteor every time space bar is clicked
         const aNewMeteor = this.physics.add.sprite(this.deer.x, this.deer.y, 'meteor')
         this.meteorGroup.add(aNewMeteor)
+        // add a meteor crash sound to gamescene
+        this.sound.play('crash')
       }
     }
 
     if (keySpaceObj.isUp === true) {
       this.fireMeteor = false
     }
+
+    // move meteors up the screen
+    this.meteorGroup.children.each(function (item) {
+      item.y = item.y -15
+      if (item.y < 0) {
+        item.destroy()
+      }
+    })
   }
 }
 
