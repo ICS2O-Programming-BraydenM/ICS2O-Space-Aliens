@@ -23,7 +23,7 @@ class MenuScene extends Phaser.Scene {
     // create a variable to add text to menu scene for instructions
     this.menuSceneInstructions = null
 
-    this.menuSceneTextStyle = { font: '30px Times', fill: '#ffffff', align: 'left' } 
+    this.menuSceneTextStyle = { font: '30px Arial', fill: '#ffffff', align: 'left' } 
   }
 
   /**
@@ -66,7 +66,7 @@ class MenuScene extends Phaser.Scene {
     // when the person clicks on image, make a button
     this.startButton.on('pointerdown', () => this.clickButton())
 
-    this.menuSceneInstructions = this.add.text(150, 100, 'Hi there! And welcome to Falling STARS!\n To play the game, move the character left or right with the left and right arrow keys\n Meteors will be falling from the sky, trying to hit you. You have 3 lives, and each time a new meteor hits you, you lose a life.\n Try to avoid the meteors at all costs.\n Your defense weapon are falling stars, which you can shoot at the meteor to destroy them before they destory you. Each time you blast a meteor with a falling star, you will gain a point. ', this.menuSceneTextStyle)
+    this.menuSceneInstructions = this.add.text(200, 100, 'Hi there! And welcome to Falling STARS!\n To play the game, move the character left or right with the left and right arrow keys.\n Meteors will be falling from the sky, trying to hit you.\n You have 3 lives, and each time a new meteor hits you, you lose a life.\n Try to avoid the meteors at all costs.\n Your defense weapon are falling stars, which you can shoot at the meteor to destroy them before they destroy you.\n Each time you blast a meteor with a falling star, you will gain a point.\n If you collect 40 points, you win! If you lose your 3 lives, you lose.\n If you run out of meteors, press "p" to spawn new meteors.\n Have fun! ', this.menuSceneTextStyle)
   }
 
   /**

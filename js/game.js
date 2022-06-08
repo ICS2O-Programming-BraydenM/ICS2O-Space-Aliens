@@ -12,7 +12,7 @@ import TitleScene from './titleScene.js'
 import MenuScene from './menuScene.js'
 import GameScene from './gameScene.js'
 import GameOverScene from './gameOverScene.js'
-import youWinScene from './youWinScene.js'
+import YouWinScene from './youWinScene.js'
 
 // Our game scenes
 const splashScene = new SplashScene()
@@ -20,7 +20,7 @@ const titleScene = new TitleScene()
 const menuScene = new MenuScene()
 const gameScene = new GameScene()
 const gameOverScene = new GameOverScene()
-const youWinScene = new youWinScene()
+const youWinScene = new YouWinScene()
 
 //* Game scene */
 const config = {
@@ -30,7 +30,7 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: {
-      debug: true,
+      debug: false,
     }
   },
   // set background color
