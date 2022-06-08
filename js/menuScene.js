@@ -23,7 +23,7 @@ class MenuScene extends Phaser.Scene {
     // create a variable to add text to menu scene for instructions
     this.menuSceneInstructions = null
 
-    this.menuSceneTextStyle = { font: '30px Arial', fill: '#ffffff', align: 'left' } 
+    this.menuSceneTextStyle = { font: '30px Arial', fill: '#ffffff', align: 'center' } 
   }
 
   /**
