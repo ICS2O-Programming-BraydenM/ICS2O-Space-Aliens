@@ -51,10 +51,8 @@ class GameScene extends Phaser.Scene {
     // a variable to change font of text for num lives
     this.livesTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
 
-    // a variable to hold the game over score
-    this.gameOverText = null
-    // a variable that will hold the game over score text style
-    this.gameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
+    // initliaize meteor created by clicking p key
+    this.meteorCreated = false
   }
 
   /**
@@ -141,10 +139,9 @@ class GameScene extends Phaser.Scene {
       // if statement to have game over text appear after 3 lives have been taken
       if (this.lives <= 0) {
         deerCollide.destroy()
-        this.physics.pause()
-        this.gameOverText = this.add.text(1920 /2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
-        this.gameOverText.setInteractive({ useHandCursor: true })
-        this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
+        this.scene.switch('gameOverScene')
+        this.score = 0 
+        this.lives = 3
       }
     }.bind(this))
   }
@@ -162,6 +159,21 @@ class GameScene extends Phaser.Scene {
     const keyRightObj = this.input.keyboard.addKey('RIGHT')
     // create a variable that shoots a meteor when we hot the space bar
     const keySpaceObj = this.input.keyboard.addKey('SPACE')
+    // create a variable that creates new meteors
+    const keyPObj = this.input.keyboard.addKey('P')
+
+    // if p key is pressed, spawn a new meteor
+    if (keyPObj.isDown === true) {
+      if (this.meteorCreated === false) { 
+        this.createMeteor()
+        this.meteorCreated = true
+      }
+    }
+
+    // if statement to see if p button is no longer being held
+    if (keyPObj.isUp === true) {
+      this.meteorCreated = false
+    }
     
     // if left arrow key is pressed, move sprite 10 pixels to the left
     if (keyLeftObj.isDown === true) {
