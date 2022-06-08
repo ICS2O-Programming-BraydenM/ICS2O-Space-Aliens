@@ -125,6 +125,9 @@ class GameScene extends Phaser.Scene {
       this.sound.play('explosion')
       this.score = this.score + 1
       this.scoreText.setText('Score: ' + this.score.toString())
+      if (this.score <= 2) {
+        this.scene.switch('youWinScene')
+      }
       this.createMeteor()
     }.bind(this))
 
