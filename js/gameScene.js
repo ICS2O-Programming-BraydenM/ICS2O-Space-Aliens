@@ -44,6 +44,13 @@ class GameScene extends Phaser.Scene {
     // a variable to change font of text for score
     this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
 
+    // a variable that will hold the lives, initialize to three lives
+    this.lives = 3
+    // add text to gamescene for lives
+    this.livesText = null
+    // a variable to change font of text for num lives
+    this.livesTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
+
     // a variable to hold the game over score
     this.gameOverText = null
     // a variable that will hold the game over score text style
@@ -98,6 +105,9 @@ class GameScene extends Phaser.Scene {
 
     // make text appear on screen showing user score
     this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
+
+    // make text appear on screen showing user lives
+    this.livesText = this.add.text(400, 10, 'Lives: ' + this.lives.toString(), this.livesTextStyle)
     
     // using physics to move sprite around the screen
     this.deer = this.physics.add.sprite(1920 / 2, 1080 - 100, 'deer').setScale(0.3)
@@ -123,12 +133,19 @@ class GameScene extends Phaser.Scene {
     // collisions between deer and meteors
     this.physics.add.collider(this.deer, this.meteorGroup, function (deerCollide, meteorCollide) {
       this.sound.play('lose')
-      this.physics.pause()
+      this.lives -= 1
+      this.livesText.setText('Lives: ' + this.lives.toString())
       meteorCollide.destroy()
-      deerCollide.destroy()
-      this.gameOverText = this.add.text(1920 /2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
-      this.gameOverText.setInteractive({ useHandCursor: true })
-      this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
+      this.deer.body.velocity.y = 0
+      this.createMeteor()
+      // if statement to have game over text appear after 3 lives have been taken
+      if (this.lives <= 0) {
+        deerCollide.destroy()
+        this.physics.pause()
+        this.gameOverText = this.add.text(1920 /2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
+        this.gameOverText.setInteractive({ useHandCursor: true })
+        this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
+      }
     }.bind(this))
   }
 
