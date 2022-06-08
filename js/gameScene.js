@@ -37,6 +37,17 @@ class GameScene extends Phaser.Scene {
     this.deer = null
     // create a variable that shoots falling stars to protect sprite from enemy
     this.fireFallingStar = false
+    // a variable that will hold the score, initialize to zero
+    this.score = 0
+    // add text to gamescene for score
+    this.scoreText = null
+    // a variable to change font of text for score
+    this.scoreTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
+
+    // a variable to hold the game over score
+    this.gameOverText = null
+    // a variable that will hold the game over score text style
+    this.gameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
   }
 
   /**
@@ -70,6 +81,9 @@ class GameScene extends Phaser.Scene {
     this.load.audio('bam', '../sounds/meteor.wav')
     // adding sound file for when meteors and falling stars collide
     this.load.audio('explosion', '../sounds/explosion.wav')
+
+    // adding sound file for when meteors collide with sprite
+    this.load.audio('lose', '../sounds/youlose.wav')
   }
 
   /**
@@ -81,6 +95,10 @@ class GameScene extends Phaser.Scene {
     // create that background image for game scene that was preloaded
     this.background = this.add.image(0, 0, 'starBackground').setScale(1.0)
     this.background.setOrigin(0, 0)
+
+    // make text appear on screen showing user score
+    this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
+    
     // using physics to move sprite around the screen
     this.deer = this.physics.add.sprite(1920 / 2, 1080 - 100, 'deer').setScale(0.3)
 
@@ -97,8 +115,20 @@ class GameScene extends Phaser.Scene {
       meteorCollide.destroy()
       fallingStarCollide.destroy()
       this.sound.play('explosion')
+      this.score = this.score + 1
+      this.scoreText.setText('Score: ' + this.score.toString())
       this.createMeteor()
-      this.createMeteor()
+    }.bind(this))
+
+    // collisions between deer and meteors
+    this.physics.add.collider(this.deer, this.meteorGroup, function (deerCollide, meteorCollide) {
+      this.sound.play('lose')
+      this.physics.pause()
+      meteorCollide.destroy()
+      deerCollide.destroy()
+      this.gameOverText = this.add.text(1920 /2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
+      this.gameOverText.setInteractive({ useHandCursor: true })
+      this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
     }.bind(this))
   }
 
