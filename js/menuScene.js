@@ -27,18 +27,14 @@ class MenuScene extends Phaser.Scene {
   }
 
   /**
-   * Can be defined on your own Scenes.
-   * This method is called the Scene Manager when the scene starts,
-   *  before preload() and create().
-   * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
+   * Can be defined on your own Scenes, this is where the scene starts, before the preload or the create 
    */
   init (data) {
     this.cameras.main.setBackgroundColor('#ffffff')
   }
 
   /**
-   * Can be defined on your own Scenes.
-   * Use it to load assets.
+   * Can be defined on your own Scene, use this to load image and sound files
    */
   preload () {
     console.log('Menu Scene')
@@ -49,9 +45,7 @@ class MenuScene extends Phaser.Scene {
   }
 
   /**
-   * Can be defined on your own Scenes. 
-   * Use it to create your game objects.
-   * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
+   * Can be defined on your own Scene, use it to create game objects like images and text
    */
   create (data) {
     // create that background image for menu scene that was preloaded
@@ -70,10 +64,7 @@ class MenuScene extends Phaser.Scene {
   }
 
   /**
-   * Should be overridden by your own Scenes.
-   * This method is called once per game step while the scene is running.
-   * @param {number} time - The current time.
-   * @param {number} delta - The delta time in ms since the last frame.
+   * Should be overridden by your own Scenes, this method is called once per game step while the scene is running, and can control how long scenes run for and what keys perform what in the game, along with other things
    */
   update (time, delta) {
     // pass
