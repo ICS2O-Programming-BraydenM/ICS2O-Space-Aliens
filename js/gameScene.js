@@ -51,7 +51,7 @@ class GameScene extends Phaser.Scene {
     // a variable to change font of text for num lives
     this.livesTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
 
-    // initliaize meteor created by clicking p key
+    // initialize meteor created by clicking p key
     this.meteorCreated = false
   }
 
@@ -73,7 +73,7 @@ class GameScene extends Phaser.Scene {
     this.load.image('deer', '../images/deer.png')
     // loading image so we can have falling stars protecting the sprite, attacking our enemy
     this.load.image('fallingstar', '../images/fallingstar.png')
-    // loading image so we have an ememy, the meteors, which will be attacking the sprite
+    // loading image so we have an enemy, the meteors, which will be attacking the sprite
     this.load.image('meteor', '../images/meteor.png')
 
     // adding sound files for game for our falling star
@@ -119,7 +119,7 @@ class GameScene extends Phaser.Scene {
       this.sound.play('explosion')
       this.score = this.score + 1
       this.scoreText.setText('Score: ' + this.score.toString())
-      if (this.score >= 8) {
+      if (this.score >= 20) {
         this.scene.switch('youWinScene')
         this.score = 0 
         this.lives = 3

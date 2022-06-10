@@ -59,7 +59,7 @@ class MenuScene extends Phaser.Scene {
     this.startButton.setInteractive({ useHandCursor: true })
     // when the person clicks on image, make a button
     this.startButton.on('pointerdown', () => this.clickButton())
-
+    // adding instructions to menu scene
     this.menuSceneInstructions = this.add.text(200, 100, 'Hi there! And welcome to Falling STARS!\n To play the game, move the character left or right with the left and right arrow keys.\n Meteors will be falling from the sky, trying to hit you.\n You have 3 lives, and each time a new meteor hits you, you lose a life.\n Try to avoid the meteors at all costs.\n Your defense weapon are falling stars, which you can shoot at the meteor to destroy them before they destroy you.\n Each time you blast a meteor with a falling star, you will gain a point.\n If you collect 40 points, you win! If you lose your 3 lives, you lose.\n If you run out of meteors, press "p" to spawn new meteors.\n Have fun! ', this.menuSceneTextStyle)
   }
 
