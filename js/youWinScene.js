@@ -37,7 +37,7 @@ class youWinScene extends Phaser.Scene {
   preload () {
     console.log('You Win Scene')
     // loading image so we can have a background image for my game over scene
-    this.load.image('youWinSceneBackground', '../images/winner.jpg')
+    this.load.image('youWinSceneBackground', './images/winner.jpg')
   }
 
   /**

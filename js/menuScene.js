@@ -39,9 +39,9 @@ class MenuScene extends Phaser.Scene {
   preload () {
     console.log('Menu Scene')
     // loading image so we can have a background image for my menu scene
-    this.load.image('menuSceneBackground', '../images/galaxy.jpg')
+    this.load.image('menuSceneBackground', './images/galaxy.jpg')
     // loading image so we can have a button to take us to game scene 
-    this.load.image('startButton', '../images/button.png')
+    this.load.image('startButton', './images/button.png')
   }
 
   /**

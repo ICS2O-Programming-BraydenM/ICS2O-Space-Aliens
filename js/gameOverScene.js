@@ -37,7 +37,7 @@ class GameOverScene extends Phaser.Scene {
   preload () {
     console.log('Splash Scene')
     // loading image so we can have a background image for my game over scene
-    this.load.image('gameOverSceneBackground', '../images/starrynight.gif')
+    this.load.image('gameOverSceneBackground', './images/starrynight.gif')
   }
 
   /**

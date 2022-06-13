@@ -36,7 +36,7 @@ class TitleScene extends Phaser.Scene {
   preload () {
     console.log('Title Scene')
     // loading image so we can have a background image for my title scene
-    this.load.image('titleSceneBackground', '../images/stars.jpg')
+    this.load.image('titleSceneBackground', './images/stars.jpg')
   }
 
   /**

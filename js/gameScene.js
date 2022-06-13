@@ -68,23 +68,23 @@ class GameScene extends Phaser.Scene {
   preload () {
     console.log('Game Scene')
     // loading image so we can have a background image for my game scene
-    this.load.image('starBackground', '../images/gamestar.jpg')
+    this.load.image('starBackground', './images/gamestar.jpg')
     // loading image so we can have an image for my sprite
-    this.load.image('deer', '../images/deer.png')
+    this.load.image('deer', './images/deer.png')
     // loading image so we can have falling stars protecting the sprite, attacking our enemy
-    this.load.image('fallingstar', '../images/fallingstar.png')
+    this.load.image('fallingstar', './images/fallingstar.png')
     // loading image so we have an enemy, the meteors, which will be attacking the sprite
-    this.load.image('meteor', '../images/meteor.png')
+    this.load.image('meteor', './images/meteor.png')
 
     // adding sound files for game for our falling star
-    this.load.audio('crash', '../sounds/fallingstar.wav')
+    this.load.audio('crash', './sounds/fallingstar.wav')
     // adding sound files for game for our meteors (enemy)
-    this.load.audio('bam', '../sounds/meteor.wav')
+    this.load.audio('bam', './sounds/meteor.wav')
     // adding sound file for when meteors and falling stars collide
-    this.load.audio('explosion', '../sounds/explosion.wav')
+    this.load.audio('explosion', './sounds/explosion.wav')
 
     // adding sound file for when meteors collide with sprite
-    this.load.audio('lose', '../sounds/youlose.wav')
+    this.load.audio('lose', './sounds/youlose.wav')
   }
 
   /**
