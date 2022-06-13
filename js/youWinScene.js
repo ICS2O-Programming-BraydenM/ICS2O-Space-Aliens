@@ -50,7 +50,7 @@ class youWinScene extends Phaser.Scene {
     this.youWinSceneBackgroundImage.y = 1080 / 2
 
     // create text that says game over
-    this.youWinText = this.add.text(1920 /2, 1080 / 2, 'You Win!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
+    this.youWinText = this.add.text(1920 /2, 1080 / 2, 'You Win!\nClick here to play again.', this.gameOverTextStyle).setOrigin(0.5)
     this.youWinText.setInteractive({ useHandCursor: true })
     this.youWinText.on('pointerdown', () => this.scene.start('gameScene')).setScale(2.0)
   }

@@ -19,11 +19,8 @@ class MenuScene extends Phaser.Scene {
     this.menuSceneBackgroundImage = null
     // creating a variable so that users can click a button from menu scene to open game scene
     this.startButton = null
-
-    // create a variable to add text to menu scene for instructions
-    this.menuSceneInstructions = null
-
-    this.menuSceneTextStyle = { font: '30px Arial', fill: '#ffffff', align: 'center' } 
+     // creating a variable so that users can click a button from menu scene to open instruction scene
+    this.startSecondButton = null
   }
 
   /**
@@ -42,6 +39,8 @@ class MenuScene extends Phaser.Scene {
     this.load.image('menuSceneBackground', './images/galaxy.jpg')
     // loading image so we can have a button to take us to game scene 
     this.load.image('startButton', './images/button.png')
+    // loading image so we can have a button to take us to instructions scene
+    this.load.image('startSecondButton', './images/instructions.png')
   }
 
   /**
@@ -59,8 +58,13 @@ class MenuScene extends Phaser.Scene {
     this.startButton.setInteractive({ useHandCursor: true })
     // when the person clicks on image, make a button
     this.startButton.on('pointerdown', () => this.clickButton())
-    // adding instructions to menu scene
-    this.menuSceneInstructions = this.add.text(200, 100, 'Hi there! And welcome to Falling STARS!\n To play the game, move the character left or right with the left and right arrow keys.\n Meteors will be falling from the sky, trying to hit you.\n You have 3 lives, and each time a new meteor hits you, you lose a life.\n Try to avoid the meteors at all costs.\n Your defense weapon are falling stars, which you can shoot at the meteor to destroy them before they destroy you.\n Each time you blast a meteor with a falling star, you will gain a point.\n If you collect 40 points, you win! If you lose your 3 lives, you lose.\n If you run out of meteors, press "p" to spawn new meteors.\n Have fun! ', this.menuSceneTextStyle)
+
+    // creating a button that will be on our menu scene for instructions 
+    this.startSecondButton = this.add.sprite(1000 / 2, (570 / 2) + 570, 'startSecondButton').setScale(0.5)
+    // making the button interactive so that when we click on it we get transported to instructions scene
+    this.startSecondButton.setInteractive({ useHandCursor: true })
+    // when the person clicks on image, make a button
+    this.startSecondButton.on('pointerdown', () => this.clickSecondButton())
   }
 
   /**
@@ -73,6 +77,11 @@ class MenuScene extends Phaser.Scene {
   // function for the button to work
   clickButton () {
     this.scene.start('gameScene')
+  }
+
+  // function for the button to work
+  clickSecondButton () {
+    this.scene.start('instructionsScene')
   }
 }
 

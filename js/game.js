@@ -13,6 +13,7 @@ import MenuScene from './menuScene.js'
 import GameScene from './gameScene.js'
 import GameOverScene from './gameOverScene.js'
 import YouWinScene from './youWinScene.js'
+import InstructionsScene from './instructionsScene.js'
 
 // Our game scenes
 const splashScene = new SplashScene()
@@ -21,6 +22,7 @@ const menuScene = new MenuScene()
 const gameScene = new GameScene()
 const gameOverScene = new GameOverScene()
 const youWinScene = new YouWinScene()
+const instructionsScene = new InstructionsScene()
 
 //* Game scene */
 const config = {
@@ -53,6 +55,7 @@ game.scene.add('menuScene', menuScene)
 game.scene.add('gameScene', gameScene)
 game.scene.add('gameOverScene', gameOverScene)
 game.scene.add('youWinScene', youWinScene)
+game.scene.add('instructionsScene', instructionsScene)
 
 // start title
 game.scene.start('splashScene')
