@@ -209,6 +209,13 @@ class GameScene extends Phaser.Scene {
         item.destroy()
       }
     })
+     // respawn enemy when it goes off of screen
+    this.meteorGroup.children.each(function (item) {
+      if (item.y > 1080) {
+        item.y = -10
+        item.x = Math.floor(Math.random() * 1920 + 1) 
+      }
+    })
   }
 }
 

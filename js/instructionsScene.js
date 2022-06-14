@@ -22,6 +22,9 @@ class InstructionsScene extends Phaser.Scene {
     this.instructionsSceneInstructions = null
 
     this.instructionsSceneTextStyle = { font: '30px Arial', fill: '#ffffff', align: 'center' } 
+
+    // creating a variable so that users can click a button from instruction scene back to menu scene
+    this.startReturnButton = null
   }
 
   /**
@@ -38,6 +41,8 @@ class InstructionsScene extends Phaser.Scene {
     console.log('Instructions Scene')
     // loading image so we can have a background image for my game over scene
     this.load.image('instructionsSceneBackground', './images/instructions.jpg')
+    // loading image so we can have a button to take us back to menu scene
+    this.load.image('startReturnButton', './images/buttonmenu.png')
   }
 
   /**
@@ -50,9 +55,14 @@ class InstructionsScene extends Phaser.Scene {
     this.instructionsSceneBackgroundImage.y = 1080 / 2
 
     // create text that says game over
-    this.instructionsText = this.add.text(200, 100, 'Hi there! And welcome to Falling STARS!\n To play the game, move the character left or right with the left and right arrow keys.\n Meteors will be falling from the sky, trying to hit you.\n You have 3 lives, and each time a new meteor hits you, you lose a life.\n Try to avoid the meteors at all costs.\n Your defense weapon are falling stars, which you can shoot at the meteor to destroy them before they destroy you.\n Each time you blast a meteor with a falling star, you will gain a point.\n If you collect 20 points, you win! If you lose your 3 lives, you lose.\n If you run out of meteors, press "p" to spawn new meteors.\n Have fun!\n Click here to return to menu scene. ', this.instructionsSceneTextStyle)
-    this.instructionsText.setInteractive({ useHandCursor: true })
-    this.instructionsText.on('pointerdown', () => this.scene.start('menuScene'))
+    this.instructionsText = this.add.text(200, 100, 'Hi there! And welcome to Falling STARS!\n To play the game, move the character left or right with the left and right arrow keys.\n Meteors will be falling from the sky, trying to hit you.\n You have 3 lives, and each time a new meteor hits you, you lose a life.\n Try to avoid the meteors at all costs.\n Your defense weapon are falling stars, which you can shoot at the meteor to destroy them before they destroy you.\n Each time you blast a meteor with a falling star, you will gain a point.\n If you collect 20 points, you win! If you lose your 3 lives, you lose.\n If you run out of meteors, press "p" to spawn new meteors.\n Have fun!\n Click on the button below to return to the menu scene. ', this.instructionsSceneTextStyle)
+
+    // creating a button that will be on our menu scene image 
+    this.startReturnButton = this.add.sprite(1920 / 2, (1080 / 2) + 100, 'startReturnButton').setScale(0.5)
+    // making the button interactive so that when we click on it we get transported to game scene
+    this.startReturnButton.setInteractive({ useHandCursor: true })
+    // when the person clicks on image, make a button
+    this.startReturnButton.on('pointerdown', () => this.clickReturnButton())
   }
 
   /**
@@ -61,6 +71,11 @@ class InstructionsScene extends Phaser.Scene {
   update (time, delta) {
     // pass
     }
+
+  // function for the button to work
+  clickReturnButton () {
+    this.scene.start('menuScene')
+  }
   }
 
 export default InstructionsScene

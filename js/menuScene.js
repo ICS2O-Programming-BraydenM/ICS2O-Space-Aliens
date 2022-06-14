@@ -20,7 +20,7 @@ class MenuScene extends Phaser.Scene {
     // creating a variable so that users can click a button from menu scene to open game scene
     this.startButton = null
      // creating a variable so that users can click a button from menu scene to open instruction scene
-    this.startSecondButton = null
+    this.startSecondButton = null 
   }
 
   /**

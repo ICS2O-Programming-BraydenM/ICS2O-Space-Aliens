@@ -54,6 +54,11 @@ class SplashScene extends Phaser.Scene {
       this.scene.switch('titleScene')
     }
   }
+
+  // function for the button to work
+  clickReturnButton () {
+    this.scene.start('menuScene')
+  }
 }
 
 export default SplashScene
