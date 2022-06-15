@@ -23,7 +23,7 @@ class SecondGameScene extends Phaser.Scene {
     aPlanetEnemy.body.velocity.x = planetEnemyXVelocity
     this.planetGroup.add(aPlanetEnemy)
     // add sound to planet
-    this.sound.play('bam')
+    this.sound.play('blast')
   }
 
   /**
@@ -79,7 +79,7 @@ class SecondGameScene extends Phaser.Scene {
     // adding sound files for game for our falling star
     this.load.audio('crash', './sounds/fallingstar.wav')
     // adding sound files for game for our planets (enemy)
-    this.load.audio('bam', './sounds/planetnoise.wav')
+    this.load.audio('blast', './sounds/planetnoise.wav')
     // adding sound file for when planets and falling stars collide
     this.load.audio('explosion', './sounds/explosion.wav')
 
