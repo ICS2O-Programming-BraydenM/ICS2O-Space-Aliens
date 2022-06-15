@@ -9,20 +9,20 @@
 /**
  * This class is the Game Scene.
  */
-class GameScene extends Phaser.Scene {
+class SecondGameScene extends Phaser.Scene {
   // create a meteor enemy
-  createMeteor() {
+  createPlanet() {
     // create a variable that generates a random number/area for our enemy to come from
-    const meteorXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920
-    let meteorXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50
-    meteorXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add a minus sign in 50% of cases
-    const aMeteor = this.physics.add.sprite(meteorXLocation, -100, 'meteor').setScale(0.3)
+    const planetEnemyXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920
+    let planetEnemyXVelocity = Math.floor(Math.random() * 50) + 1 // this will get a number between 1 and 50
+    planetEnemyXVelocity *= Math.round(Math.random()) ? 1 : -1 // this will add a minus sign in 50% of cases
+    const aPlanetEnemy = this.physics.add.sprite(planetEnemyXLocation, -100, 'planet').setScale(0.5)
     // bring enemy downwards
-    aMeteor.body.velocity.y = 200
+    aPlanetEnemy.body.velocity.y = 200
     // allow enemy to move in different directions
-    aMeteor.body.velocity.x = meteorXVelocity
-    this.meteorGroup.add(aMeteor)
-    // add sound to meteor
+    aPlanetEnemy.body.velocity.x = planetEnemyXVelocity
+    this.planetGroup.add(aPlanetEnemy)
+    // add sound to planet
     this.sound.play('bam')
   }
 
@@ -30,7 +30,7 @@ class GameScene extends Phaser.Scene {
    * This method is the constructor.
    */
   constructor () {
-    super({ key: 'gameScene' })
+    super({ key: 'secondGameScene' })
     // create a variable to hold the background of our game scene 
     this.background = null
     // create a variable that represents our sprite 
@@ -52,7 +52,7 @@ class GameScene extends Phaser.Scene {
     this.livesTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
 
     // initialize meteor created by clicking p key
-    this.meteorCreated = false
+    this.planetCreated = false
   }
 
   /**
@@ -66,24 +66,24 @@ class GameScene extends Phaser.Scene {
    * Can be defined on your own Scene, use this to load image and sound files
    */
   preload () {
-    console.log('Game Scene')
+    console.log('Second Game Scene')
     // loading image so we can have a background image for my game scene
-    this.load.image('starBackground', './images/gamestar.jpg')
+    this.load.image('spaceBackground', './images/secondlevel.jpg')
     // loading image so we can have an image for my sprite
     this.load.image('deer', './images/deer.png')
     // loading image so we can have falling stars protecting the sprite, attacking our enemy
     this.load.image('fallingstar', './images/fallingstar.png')
-    // loading image so we have an enemy, the meteors, which will be attacking the sprite
-    this.load.image('meteor', './images/meteor.png')
+    // loading image so we have an enemy, the planets, which will be attacking the sprite
+    this.load.image('planet', './images/planet.png')
 
     // adding sound files for game for our falling star
     this.load.audio('crash', './sounds/fallingstar.wav')
-    // adding sound files for game for our meteors (enemy)
-    this.load.audio('bam', './sounds/meteor.wav')
-    // adding sound file for when meteors and falling stars collide
+    // adding sound files for game for our planets (enemy)
+    this.load.audio('bam', './sounds/planetnoise.wav')
+    // adding sound file for when planets and falling stars collide
     this.load.audio('explosion', './sounds/explosion.wav')
 
-    // adding sound file for when meteors collide with sprite
+    // adding sound file for when planets collide with sprite
     this.load.audio('lose', './sounds/youlose.wav')
   }
 
@@ -92,7 +92,7 @@ class GameScene extends Phaser.Scene {
    */
   create (data) {
     // create that background image for game scene that was preloaded
-    this.background = this.add.image(0, 0, 'starBackground').setScale(1.0)
+    this.background = this.add.image(0, 0, 'spaceBackground').setScale(2.5)
     this.background.setOrigin(0, 0)
 
     // make text appear on screen showing user score
@@ -108,13 +108,13 @@ class GameScene extends Phaser.Scene {
     this.fallingStarGroup = this.physics.add.group()
 
     // create a group for the meteors
-    this.meteorGroup = this.add.group()
+    this.planetGroup = this.add.group()
     // create a function for meteors
-    this.createMeteor()
+    this.createPlanet()
 
     // collisions between meteors and falling stars
-    this.physics.add.collider(this.fallingStarGroup, this.meteorGroup, function (fallingStarCollide, meteorCollide) {
-      meteorCollide.destroy()
+    this.physics.add.collider(this.fallingStarGroup, this.planetGroup, function (fallingStarCollide, planetCollide) {
+      planetCollide.destroy()
       fallingStarCollide.destroy()
       this.sound.play('explosion')
       this.score = this.score + 1
@@ -124,26 +124,25 @@ class GameScene extends Phaser.Scene {
         this.score = 0 
         this.lives = 3
       }
-      this.createMeteor()
+      this.createPlanet()
     }.bind(this))
 
     // collisions between deer and meteors
-    this.physics.add.collider(this.deer, this.meteorGroup, function (deerCollide, meteorCollide) {
+    this.physics.add.collider(this.deer, this.planetGroup, function (deerCollide, planetCollide) {
       this.sound.play('lose')
       this.lives -= 1
       this.livesText.setText('Lives: ' + this.lives.toString())
-      meteorCollide.destroy()
+      planetCollide.destroy()
       this.deer.body.velocity.y = 0
-      this.createMeteor()
+      this.createPlanet()
       // if statement to have game over text appear after 3 lives have been taken
       if (this.lives <= 0) {
         deerCollide.destroy()
-        this.scene.switch('gameOverScene')
+        this.scene.switch('secondGameOverScene')
         this.score = 0 
         this.lives = 3
       }
     }.bind(this))
-
   }
 
   /**
@@ -161,15 +160,15 @@ class GameScene extends Phaser.Scene {
 
     // if p key is pressed, spawn a new meteor
     if (keyPObj.isDown === true) {
-      if (this.meteorCreated === false) { 
-        this.createMeteor()
-        this.meteorCreated = true
+      if (this.planetCreated === false) { 
+        this.createPlanet()
+        this.planetCreated = true
       }
     }
 
     // if statement to see if p button is no longer being held
     if (keyPObj.isUp === true) {
-      this.meteorCreated = false
+      this.planetCreated = false
     }
     
     // if left arrow key is pressed, move sprite 10 pixels to the left
@@ -213,7 +212,7 @@ class GameScene extends Phaser.Scene {
       }
     })
      // respawn enemy when it goes off of screen
-    this.meteorGroup.children.each(function (item) {
+    this.planetGroup.children.each(function (item) {
       if (item.y > 1080) {
         item.y = -10
         item.x = Math.floor(Math.random() * 1920 + 1) 
@@ -222,4 +221,4 @@ class GameScene extends Phaser.Scene {
   }
 }
 
-export default GameScene
+export default SecondGameScene

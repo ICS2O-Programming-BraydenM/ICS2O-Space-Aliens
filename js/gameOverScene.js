@@ -22,6 +22,9 @@ class GameOverScene extends Phaser.Scene {
     this.gameOverText = null
     // a variable that will hold the game over score text style
     this.gameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
+
+    // creating a variable so that users can click game over scene to the next level (secondgamescene)
+    this.startSecondLevelButton = null
   }
 
   /**
@@ -38,6 +41,8 @@ class GameOverScene extends Phaser.Scene {
     console.log('Splash Scene')
     // loading image so we can have a background image for my game over scene
     this.load.image('gameOverSceneBackground', './images/starrynight.gif')
+    // loading image so we can have a button to take us to the second level
+    this.load.image('startSecondLevelButton', './images/leveltwobutton.png')
   }
 
   /**
@@ -53,6 +58,13 @@ class GameOverScene extends Phaser.Scene {
     this.gameOverText = this.add.text(1920 /2, 1080 / 2, 'Game Over!\nClick here to play again.', this.gameOverTextStyle).setOrigin(0.5)
     this.gameOverText.setInteractive({ useHandCursor: true })
     this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
+
+    // creating a button that will be on our game over scene
+    this.startSecondLevelButton = this.add.sprite(1920 / 2, (1080 / 2) + 250, 'startSecondLevelButton').setScale(0.3)
+    // making the button interactive so that when we click on it we get transported to the second level
+    this.startSecondLevelButton.setInteractive({ useHandCursor: true })
+    // when the person clicks on image, make a button
+    this.startSecondLevelButton.on('pointerdown', () => this.clickSecondLevelButton())
   }
 
   /**
@@ -61,6 +73,12 @@ class GameOverScene extends Phaser.Scene {
   update (time, delta) {
     // pass
     }
+
+   // function for the button to work
+  clickSecondLevelButton () {
+    this.scene.start('secondGameScene')
+  }
+
   }
 
 export default GameOverScene
