@@ -16,6 +16,7 @@ import YouWinScene from './youWinScene.js'
 import InstructionsScene from './instructionsScene.js'
 import SecondGameScene from './secondGameScene.js'
 import SecondGameOverScene from './secondGameOverScene.js'
+import SecondYouWinScene from './secondYouWinScene.js'
 
 // Our game scenes
 const splashScene = new SplashScene()
@@ -27,6 +28,7 @@ const youWinScene = new YouWinScene()
 const instructionsScene = new InstructionsScene()
 const secondGameScene = new SecondGameScene()
 const secondGameOverScene = new SecondGameOverScene()
+const secondYouWinScene = new SecondYouWinScene()
 
 //* Game scene */
 const config = {
@@ -62,6 +64,7 @@ game.scene.add('youWinScene', youWinScene)
 game.scene.add('instructionsScene', instructionsScene)
 game.scene.add('secondGameScene', secondGameScene)
 game.scene.add('secondGameOverScene', secondGameOverScene)
+game.scene.add('secondYouWinScene', secondYouWinScene)
 
 // start title
 game.scene.start('splashScene')

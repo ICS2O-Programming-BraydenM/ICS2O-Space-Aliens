@@ -22,6 +22,8 @@ class youWinScene extends Phaser.Scene {
     this.youWinText = null
     // a variable that will hold the game over score text style
     this.youWinTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
+    // creating a variable so that users can click game over scene to the next level (secondgamescene)
+    this.startSecondLevelButton = null
   }
 
   /**
@@ -38,6 +40,8 @@ class youWinScene extends Phaser.Scene {
     console.log('You Win Scene')
     // loading image so we can have a background image for my game over scene
     this.load.image('youWinSceneBackground', './images/winner.jpg')
+    // loading image so we can have a button to take us to the second level
+    this.load.image('startSecondLevelButton', './images/leveltwobutton.png')
   }
 
   /**
@@ -50,9 +54,16 @@ class youWinScene extends Phaser.Scene {
     this.youWinSceneBackgroundImage.y = 1080 / 2
 
     // create text that says game over
-    this.youWinText = this.add.text(1920 /2, 1080 / 2, 'You Win!\nClick here to play again.', this.gameOverTextStyle).setOrigin(0.5)
+    this.youWinText = this.add.text(1920 /2, 1080 / 2, 'You Win!\nClick here to restart.\n OR move on to the second level with the button below!', this.gameOverTextStyle).setOrigin(0.5)
     this.youWinText.setInteractive({ useHandCursor: true })
     this.youWinText.on('pointerdown', () => this.scene.start('gameScene')).setScale(2.0)
+
+    // creating a button that will be on our game over scene
+    this.startSecondLevelButton = this.add.sprite(1920 / 2, (1080 / 2) + 250, 'startSecondLevelButton').setScale(0.3)
+    // making the button interactive so that when we click on it we get transported to the second level
+    this.startSecondLevelButton.setInteractive({ useHandCursor: true })
+    // when the person clicks on image, make a button
+    this.startSecondLevelButton.on('pointerdown', () => this.clickSecondLevelButton())
   }
 
   /**
@@ -61,6 +72,12 @@ class youWinScene extends Phaser.Scene {
   update (time, delta) {
     // pass
     }
+
+  // function for the button to work
+  clickSecondLevelButton () {
+    this.scene.start('secondGameScene')
+    this.sound.play('click')
+  }
   }
 
 export default youWinScene

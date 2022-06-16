@@ -120,7 +120,7 @@ class SecondGameScene extends Phaser.Scene {
       this.score = this.score + 1
       this.scoreText.setText('Score: ' + this.score.toString())
       if (this.score >= 20) {
-        this.scene.switch('youWinScene')
+        this.scene.switch('secondYouWinScene')
         this.score = 0 
         this.lives = 3
       }

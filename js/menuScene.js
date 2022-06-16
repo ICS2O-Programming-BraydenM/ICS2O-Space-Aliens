@@ -41,6 +41,8 @@ class MenuScene extends Phaser.Scene {
     this.load.image('startButton', './images/button.png')
     // loading image so we can have a button to take us to instructions scene
     this.load.image('startSecondButton', './images/instructions.png')
+    // adding a sound for clicking a button
+    this.load.audio('click', './sounds/clickbutton.wav')
   }
 
   /**
@@ -77,11 +79,13 @@ class MenuScene extends Phaser.Scene {
   // function for the button to work
   clickButton () {
     this.scene.start('gameScene')
+    this.sound.play('click')
   }
 
   // function for the button to work
   clickSecondButton () {
     this.scene.start('instructionsScene')
+    this.sound.play('click')
   }
 }
 
