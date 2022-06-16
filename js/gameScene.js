@@ -33,7 +33,7 @@ class GameScene extends Phaser.Scene {
     super({ key: 'gameScene' })
     // create a variable to hold the background of our game scene 
     this.background = null
-    // create a variable that represents our sprite 
+    // create a variable that represents our sprite (a deer)
     this.deer = null
     // create a variable that shoots falling stars to protect sprite from enemy
     this.fireFallingStar = false
@@ -154,7 +154,7 @@ class GameScene extends Phaser.Scene {
     // create variables that allow us to move sprite left and right
     const keyLeftObj = this.input.keyboard.addKey('LEFT')
     const keyRightObj = this.input.keyboard.addKey('RIGHT')
-    // create a variable that shoots a meteor when we hot the space bar
+    // create a variable that shoots a meteor when we hit the space bar
     const keySpaceObj = this.input.keyboard.addKey('SPACE')
     // create a variable that creates new meteors
     const keyPObj = this.input.keyboard.addKey('P')
@@ -178,6 +178,7 @@ class GameScene extends Phaser.Scene {
       if (this.deer.x < 0) {
         this.deer.x = 1920
       }
+      // flip sprite the direction it is facing
       this.deer.flipX = false
     }
     // if right arrow key is pressed, move sprite 10 pixels to the right
@@ -186,9 +187,10 @@ class GameScene extends Phaser.Scene {
       if (this.deer.x > 1920) {
         this.deer.x = 0
       }
+      // flip sprite the direction it is facing
       this.deer.flipX = true
     }
-    // if spacebar is pressed, drop a meteor onto the game scene
+    // if spacebar is pressed, fire a falling star onto the game scene
     if (keySpaceObj.isDown === true) {
       if (this.fireFallingStar === false) {
         // fire falling star
@@ -205,7 +207,7 @@ class GameScene extends Phaser.Scene {
       this.fireFallingStar = false
     }
 
-    // move meteors up the screen
+    // move falling stars up the screen
     this.fallingStarGroup.children.each(function (item) {
       item.y = item.y -15
       if (item.y < 0) {

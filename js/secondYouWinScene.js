@@ -4,10 +4,10 @@
 //
 // Created by: Brayden MacMillan
 // Created on: May 2022
-// This is the Win Scene 
+// This is the Second Win Scene 
 
 /**
- * This class is the Win Scene.
+ * This class is the Second Win Scene.
  */
 class SecondYouWinScene extends Phaser.Scene {
   /**
@@ -15,12 +15,12 @@ class SecondYouWinScene extends Phaser.Scene {
    */
   constructor () {
     super({ key: 'secondYouWinScene' })
-    // creating a variable that can hold the background image for game over scene
+    // creating a variable that can hold the background image for my second you win scene
     this.secondYouWinImage = null
 
-    // a variable to hold the game over score
+    // a variable to hold the you win text
     this.secondYouWinText = null
-    // a variable that will hold the game over score text style
+    // a variable that will hold the you win text style
     this.secondYouWinTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
   }
 
@@ -36,7 +36,7 @@ class SecondYouWinScene extends Phaser.Scene {
    */
   preload () {
     console.log('Second You Win Scene')
-    // loading image so we can have a background image for my game over scene
+    // loading image so we can have a background image for second you win scene
     this.load.image('secondYouWinSceneBackground', './images/winner.jpg')
   }
 
@@ -44,12 +44,12 @@ class SecondYouWinScene extends Phaser.Scene {
    * Can be defined on your own Scene, use it to create game objects like images and text
    */
   create (data) {
-    // create that background image for splash scene that was preloaded
+    // create a background image for my second you win scene that was preloaded
     this.secondYouWinSceneBackgroundImage = this.add.sprite(0, 0, 'youWinSceneBackground').setScale(1.5)
     this.secondYouWinSceneBackgroundImage.x = 1920 / 2 
     this.secondYouWinSceneBackgroundImage.y = 1080 / 2
 
-    // create text that says game over
+    // create text that says you win, click here to restart (go back to first level, so gameScene)
     this.secondYouWinText = this.add.text(1920 /2, 1080 / 2, 'You Win!\nClick here to restart.', this.secondYouWinTextStyle).setOrigin(0.5)
     this.secondYouWinText.setInteractive({ useHandCursor: true })
     this.secondYouWinText.on('pointerdown', () => this.scene.start('gameScene')).setScale(2.0)

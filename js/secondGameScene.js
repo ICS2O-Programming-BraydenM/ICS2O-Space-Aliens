@@ -4,13 +4,13 @@
 //
 // Created by: Brayden MacMillan
 // Created on: May 2022
-// This is the Game Scene 
+// This is the Second Game Scene 
 
 /**
- * This class is the Game Scene.
+ * This class is the Second Game Scene.
  */
 class SecondGameScene extends Phaser.Scene {
-  // create a meteor enemy
+  // create a planet enemy
   createPlanet() {
     // create a variable that generates a random number/area for our enemy to come from
     const planetEnemyXLocation = Math.floor(Math.random() * 1920) + 1 // this will get a number between 1 and 1920
@@ -31,9 +31,9 @@ class SecondGameScene extends Phaser.Scene {
    */
   constructor () {
     super({ key: 'secondGameScene' })
-    // create a variable to hold the background of our game scene 
+    // create a variable to hold the background of our second game scene 
     this.background = null
-    // create a variable that represents our sprite 
+    // create a variable that represents our sprite (a deer)
     this.deer = null
     // create a variable that shoots falling stars to protect sprite from enemy
     this.fireFallingStar = false
@@ -51,7 +51,7 @@ class SecondGameScene extends Phaser.Scene {
     // a variable to change font of text for num lives
     this.livesTextStyle = { font: '65px Arial', fill: '#ffffff', align: 'center' }
 
-    // initialize meteor created by clicking p key
+    // initialize planet created by clicking p key
     this.planetCreated = false
   }
 
@@ -67,7 +67,7 @@ class SecondGameScene extends Phaser.Scene {
    */
   preload () {
     console.log('Second Game Scene')
-    // loading image so we can have a background image for my game scene
+    // loading image so we can have a background image for my second game scene
     this.load.image('spaceBackground', './images/secondlevel.jpg')
     // loading image so we can have an image for my sprite
     this.load.image('deer', './images/deer.png')
@@ -91,7 +91,7 @@ class SecondGameScene extends Phaser.Scene {
    * Can be defined on your own Scene, use it to create game objects like images and text
    */
   create (data) {
-    // create that background image for game scene that was preloaded
+    // create that background image for second game scene that was preloaded
     this.background = this.add.image(0, 0, 'spaceBackground').setScale(2.5)
     this.background.setOrigin(0, 0)
 
@@ -107,12 +107,12 @@ class SecondGameScene extends Phaser.Scene {
     // create a group for the falling stars
     this.fallingStarGroup = this.physics.add.group()
 
-    // create a group for the meteors
+    // create a group for the planets
     this.planetGroup = this.add.group()
-    // create a function for meteors
+    // create a function for planets
     this.createPlanet()
 
-    // collisions between meteors and falling stars
+    // collisions between planets and falling stars
     this.physics.add.collider(this.fallingStarGroup, this.planetGroup, function (fallingStarCollide, planetCollide) {
       planetCollide.destroy()
       fallingStarCollide.destroy()
@@ -127,7 +127,7 @@ class SecondGameScene extends Phaser.Scene {
       this.createPlanet()
     }.bind(this))
 
-    // collisions between deer and meteors
+    // collisions between deer and planets
     this.physics.add.collider(this.deer, this.planetGroup, function (deerCollide, planetCollide) {
       this.sound.play('lose')
       this.lives -= 1
@@ -153,12 +153,12 @@ class SecondGameScene extends Phaser.Scene {
     // create variables that allow us to move sprite left and right
     const keyLeftObj = this.input.keyboard.addKey('LEFT')
     const keyRightObj = this.input.keyboard.addKey('RIGHT')
-    // create a variable that shoots a meteor when we hot the space bar
+    // create a variable that shoots a falling star when we hit the space bar
     const keySpaceObj = this.input.keyboard.addKey('SPACE')
-    // create a variable that creates new meteors
+    // create a variable that creates new planets
     const keyPObj = this.input.keyboard.addKey('P')
 
-    // if p key is pressed, spawn a new meteor
+    // if p key is pressed, spawn a new planet
     if (keyPObj.isDown === true) {
       if (this.planetCreated === false) { 
         this.createPlanet()
@@ -177,6 +177,7 @@ class SecondGameScene extends Phaser.Scene {
       if (this.deer.x < 0) {
         this.deer.x = 1920
       }
+      // flip sprite the way it is facing
       this.deer.flipX = false
     }
     // if right arrow key is pressed, move sprite 10 pixels to the right
@@ -185,9 +186,10 @@ class SecondGameScene extends Phaser.Scene {
       if (this.deer.x > 1920) {
         this.deer.x = 0
       }
+      // flip sprite the way it is facing
       this.deer.flipX = true
     }
-    // if spacebar is pressed, drop a meteor onto the game scene
+    // if spacebar is pressed, fire a falling star onto the second game scene
     if (keySpaceObj.isDown === true) {
       if (this.fireFallingStar === false) {
         // fire falling star
@@ -204,7 +206,7 @@ class SecondGameScene extends Phaser.Scene {
       this.fireFallingStar = false
     }
 
-    // move meteors up the screen
+    // move falling stars up the screen
     this.fallingStarGroup.children.each(function (item) {
       item.y = item.y -15
       if (item.y < 0) {

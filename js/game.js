@@ -1,6 +1,7 @@
 /* global Phaser */
 
 // Copyright (c) 2022 Brayden MacMillan All rights reserved
+// Credit to Mr Coxall for base configuration of this Phaser 3 Game
 //
 // Created by: Brayden MacMillan
 // Created on: May 2022

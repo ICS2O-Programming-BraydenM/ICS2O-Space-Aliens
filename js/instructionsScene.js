@@ -15,13 +15,13 @@ class InstructionsScene extends Phaser.Scene {
    */
   constructor () {
     super({ key: 'instructionsScene' })
-    // creating a variable that can hold the background image for game over scene
+    // creating a variable that can hold the background image for our inrtructions scene
     this.instructionsSceneBackgroundImage = null
 
     // create a variable to add text to instructions scene for instructions
     this.instructionsSceneInstructions = null
 
-    this.instructionsSceneTextStyle = { font: '30px Arial', fill: '#ffffff', align: 'center' } 
+    this.instructionsSceneTextStyle = { font: '29.3px Arial', fill: '#ffffff', align: 'left' } 
 
     // creating a variable so that users can click a button from instruction scene back to menu scene
     this.startReturnButton = null
@@ -39,7 +39,7 @@ class InstructionsScene extends Phaser.Scene {
    */
   preload () {
     console.log('Instructions Scene')
-    // loading image so we can have a background image for my game over scene
+    // loading image so we can have a background image for my instructions scene
     this.load.image('instructionsSceneBackground', './images/instructions.jpg')
     // loading image so we can have a button to take us back to menu scene
     this.load.image('startReturnButton', './images/buttonmenu.png')
@@ -76,7 +76,7 @@ class InstructionsScene extends Phaser.Scene {
   clickReturnButton () {
     this.scene.start('menuScene')
     this.sound.play('click')
-  }
+    }
   }
 
 export default InstructionsScene

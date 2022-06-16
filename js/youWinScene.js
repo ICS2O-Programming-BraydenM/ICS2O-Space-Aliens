@@ -4,12 +4,12 @@
 //
 // Created by: Brayden MacMillan
 // Created on: May 2022
-// This is the Win Scene 
+// This is the You Win Scene 
 
 /**
- * This class is the Win Scene.
+ * This class is the You Win Scene.
  */
-class youWinScene extends Phaser.Scene {
+class YouWinScene extends Phaser.Scene {
   /**
    * This method is the constructor.
    */
@@ -22,7 +22,7 @@ class youWinScene extends Phaser.Scene {
     this.youWinText = null
     // a variable that will hold the game over score text style
     this.youWinTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
-    // creating a variable so that users can click game over scene to the next level (secondgamescene)
+    // creating a variable so that users can click a button to get to the next level (secondgamescene)
     this.startSecondLevelButton = null
   }
 
@@ -38,7 +38,7 @@ class youWinScene extends Phaser.Scene {
    */
   preload () {
     console.log('You Win Scene')
-    // loading image so we can have a background image for my game over scene
+    // loading image so we can have a background image for my you win scene
     this.load.image('youWinSceneBackground', './images/winner.jpg')
     // loading image so we can have a button to take us to the second level
     this.load.image('startSecondLevelButton', './images/leveltwobutton.png')
@@ -48,17 +48,17 @@ class youWinScene extends Phaser.Scene {
    * Can be defined on your own Scene, use it to create game objects like images and text
    */
   create (data) {
-    // create that background image for splash scene that was preloaded
+    // create a background image for my win scene that was preloaded
     this.youWinSceneBackgroundImage = this.add.sprite(0, 0, 'youWinSceneBackground').setScale(1.5)
     this.youWinSceneBackgroundImage.x = 1920 / 2 
     this.youWinSceneBackgroundImage.y = 1080 / 2
 
-    // create text that says game over
+    // create text that says you win, either restart or move to next level
     this.youWinText = this.add.text(1920 /2, 1080 / 2, 'You Win!\nClick here to restart.\n OR move on to the second level with the button below!', this.gameOverTextStyle).setOrigin(0.5)
     this.youWinText.setInteractive({ useHandCursor: true })
     this.youWinText.on('pointerdown', () => this.scene.start('gameScene')).setScale(2.0)
 
-    // creating a button that will be on our game over scene
+    // creating a button that will be on our you win scene
     this.startSecondLevelButton = this.add.sprite(1920 / 2, (1080 / 2) + 250, 'startSecondLevelButton').setScale(0.3)
     // making the button interactive so that when we click on it we get transported to the second level
     this.startSecondLevelButton.setInteractive({ useHandCursor: true })
@@ -80,4 +80,4 @@ class youWinScene extends Phaser.Scene {
   }
   }
 
-export default youWinScene
+export default YouWinScene

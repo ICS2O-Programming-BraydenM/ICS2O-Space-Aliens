@@ -41,7 +41,7 @@ class MenuScene extends Phaser.Scene {
     this.load.image('startButton', './images/button.png')
     // loading image so we can have a button to take us to instructions scene
     this.load.image('startSecondButton', './images/instructions.png')
-    // adding a sound for clicking a button
+    // adding a sound for clicking ALL buttons in the game 
     this.load.audio('click', './sounds/clickbutton.wav')
   }
 
@@ -54,7 +54,7 @@ class MenuScene extends Phaser.Scene {
     this.menuSceneBackgroundImage.x = 1920 / 2
     this.menuSceneBackgroundImage.y = 1080 / 2
 
-    // creating a button that will be on our menu scene image 
+    // creating a button that will be on our menu scene image to go to game scene
     this.startButton = this.add.sprite(1920 / 2, (1080 / 2) + 100, 'startButton')
     // making the button interactive so that when we click on it we get transported to game scene
     this.startButton.setInteractive({ useHandCursor: true })
@@ -76,13 +76,13 @@ class MenuScene extends Phaser.Scene {
     // pass
   }
 
-  // function for the button to work
+  // function for the button to work, to the game scene
   clickButton () {
     this.scene.start('gameScene')
     this.sound.play('click')
   }
 
-  // function for the button to work
+  // function for the button to work, to the instructions scene
   clickSecondButton () {
     this.scene.start('instructionsScene')
     this.sound.play('click')

@@ -4,10 +4,10 @@
 //
 // Created by: Brayden MacMillan
 // Created on: May 2022
-// This is the Game Over Scene 
+// This is the Second Game Over Scene 
 
 /**
- * This class is the Game Over Scene.
+ * This class is the Second Game Over Scene.
  */
 class SecondGameOverScene extends Phaser.Scene {
   /**
@@ -15,7 +15,7 @@ class SecondGameOverScene extends Phaser.Scene {
    */
   constructor () {
     super({ key: 'secondGameOverScene' })
-    // creating a variable that can hold the background image for game over scene
+    // creating a variable that can hold the background image for second game over scene
     this.secondGameOverSceneBackgroundImage = null
 
     // a variable to hold the game over score
@@ -23,7 +23,7 @@ class SecondGameOverScene extends Phaser.Scene {
     // a variable that will hold the game over score text style
     this.secondGameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' }
 
-     // creating a variable so that users can click a button from s3econd game over scene back to menu scene
+     // creating a variable so that users can click a button from second game over scene back to menu scene
     this.startFinalButton = null 
   }
 
@@ -39,7 +39,7 @@ class SecondGameOverScene extends Phaser.Scene {
    */
   preload () {
     console.log('Second Game Over Scene')
-    // loading image so we can have a background image for my game over scene
+    // loading image so we can have a background image for my second game over scene
     this.load.image('secondGameOverSceneBackground', './images/starrynight.gif')
      // loading image so we can have a button to take us back to menu scene after second level has been completed
     this.load.image('startFinalButton', './images/finalbutton.png')
@@ -49,7 +49,7 @@ class SecondGameOverScene extends Phaser.Scene {
    * Can be defined on your own Scene, use it to create game objects like images and text
    */
   create (data) {
-    // create that background image for splash scene that was preloaded
+    // create a background image for my second game over scene that was preloaded
     this.secondGameOverSceneBackgroundImage = this.add.sprite(0, 0, 'secondGameOverSceneBackground').setScale(2.4)
     this.secondGameOverSceneBackgroundImage.x = 1920 / 2 
     this.secondGameOverSceneBackgroundImage.y = 1080 / 2
@@ -57,9 +57,9 @@ class SecondGameOverScene extends Phaser.Scene {
     // create text that says game over
     this.secondGameOverText = this.add.text(1920 /2, 1080 / 2, 'Game Over!\nClick on the button below to return to the menu scene.', this.gameOverTextStyle).setOrigin(0.5).setScale(2)
 
-    // creating a button that will be on our menu scene image 
+    // creating a button that will be on our second game over scene image 
     this.startFinalButton = this.add.sprite(1920 / 2, (1080 / 2) + 350, 'startFinalButton').setScale(0.5)
-    // making the button interactive so that when we click on it we get transported to game scene
+    // making the button interactive so that when we click on it we get transported back to menu scene
     this.startFinalButton.setInteractive({ useHandCursor: true })
     // when the person clicks on image, make a button
     this.startFinalButton.on('pointerdown', () => this.clickFinalButton())
@@ -72,7 +72,7 @@ class SecondGameOverScene extends Phaser.Scene {
     // pass
     }
 
-  // function for the button to work
+  // function for the button to work, to menu scene
   clickFinalButton () {
     this.scene.start('menuScene')
     this.sound.play('click')

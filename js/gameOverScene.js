@@ -44,7 +44,7 @@ class GameOverScene extends Phaser.Scene {
    * Can be defined on your own Scene, use it to create game objects like images and text
    */
   create (data) {
-    // create that background image for splash scene that was preloaded
+    // create a background image for game over scene that was preloaded
     this.gameOverSceneBackgroundImage = this.add.sprite(0, 0, 'gameOverSceneBackground').setScale(1.5)
     this.gameOverSceneBackgroundImage.x = 1920 / 2 
     this.gameOverSceneBackgroundImage.y = 1080 / 2
