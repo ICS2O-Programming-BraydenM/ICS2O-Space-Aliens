@@ -4,10 +4,10 @@
 //
 // Created by: Brayden MacMillan
 // Created on: May 2022
-// This is the Second Win Scene 
+// This is the Second You Win Scene 
 
 /**
- * This class is the Second Win Scene.
+ * This class is the Second You Win Scene.
  */
 class SecondYouWinScene extends Phaser.Scene {
   /**

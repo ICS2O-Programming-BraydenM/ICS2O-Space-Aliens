@@ -57,9 +57,9 @@ class InstructionsScene extends Phaser.Scene {
     // create text that says game over
     this.instructionsText = this.add.text(200, 100, 'Hi there! And welcome to Falling STARS!\n To play the game, move the character left or right with the left and right arrow keys.\n Meteors will be falling from the sky, trying to hit you.\n You have 3 lives, and each time a new meteor hits you, you lose a life.\n Try to avoid the meteors at all costs.\n Your defense weapon are falling stars, which you can shoot at the meteor to destroy them before they destroy you.\n Each time you blast a meteor with a falling star, you will gain a point.\n If you collect 20 points, you win! If you lose your 3 lives, you lose.\n If you want a challenge, press "p" to spawn new meteors.\n There is a second level to play if you successfully beat the meteors - but this time you have to face mighty planets!\n Have fun!\n Click on the button below to return to the menu scene. ', this.instructionsSceneTextStyle)
 
-    // creating a button that will be on our menu scene image 
+    // creating a button that will be on our instructions scene image 
     this.startReturnButton = this.add.sprite(1920 / 2, (1080 / 2) + 100, 'startReturnButton').setScale(0.5)
-    // making the button interactive so that when we click on it we get transported to game scene
+    // making the button interactive so that when we click on it we get transported to menu scene
     this.startReturnButton.setInteractive({ useHandCursor: true })
     // when the person clicks on image, make a button
     this.startReturnButton.on('pointerdown', () => this.clickReturnButton())
@@ -72,7 +72,7 @@ class InstructionsScene extends Phaser.Scene {
     // pass
     }
 
-  // function for the button to work
+  // function for the button to work, to menu scene
   clickReturnButton () {
     this.scene.start('menuScene')
     this.sound.play('click')
